@@ -99,6 +99,7 @@ public extension Popover {
         }
         
         deinit {
+            print("💰💰 Popover Context deinitialized.")
             changeSink?.cancel()
         }
     }
