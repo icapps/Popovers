@@ -97,6 +97,10 @@ public extension Popover {
                 }
             }
         }
+        
+        deinit {
+            changeSink?.cancel()
+        }
     }
 }
 #endif
