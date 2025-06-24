@@ -61,7 +61,19 @@ class PopoverModel: ObservableObject {
 
     /// Removes a `Popover` from this model.
     func remove(_ popover: Popover) {
-        popovers.removeAll { $0 == popover }
+        guard let index = popovers.firstIndex(where: { $0 == popover }) else { return }
+
+        // Step 1: Replace the actual popover with an empty popover (with clean context/view/background)
+        let emptyPopover = Popover(
+            attributes: .init(),
+            view: { EmptyView() },
+            background: { EmptyView() }
+        )
+
+        popovers[index] = emptyPopover
+
+        // Now remove the empty
+        popovers.remove(at: index)
     }
 
     /**
